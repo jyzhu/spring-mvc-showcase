@@ -33,6 +33,7 @@
 		<li><a href="#exceptions">Exception Handling</a></li>
 		<li><a href="#redirect">Redirecting</a></li>
         <li><a href="#async">Async Requests</a></li>
+        <li><a href="#rest">RESTful Requests</a></li>
     </ul>
     <div id="simple">
 		<h2>Simple</h2>
@@ -118,6 +119,9 @@
 			<li>
 				<a id="header" class="textLink" href="<c:url value="/data/header" />">Header</a>
 			</li>
+            <li>
+                <a id="cookie" class="textLink" href="<c:url value="/data/cookie" />">Cookie</a>
+            </li>
 			<li>
 				<form id="requestBody" class="textForm" action="<c:url value="/data/body" />" method="post">
 					<input id="requestBodySubmit" type="submit" value="Request Body" />
@@ -240,6 +244,11 @@
 						<input id="readJsonSubmit" type="submit" value="Read JSON" />	
 					</form>
 				</li>
+                <li>
+                    <form id="readJsonInvalid" class="readJsonForm invalid" action="<c:url value="/messageconverters/jsonPost" />" method="post">
+                        <input id="readInvalidJsonSubmit" type="submit" value="Read invalid JSON (400 response code)" />    
+                    </form>
+                </li>
 				<li>
 					<form id="readJsonInvalid" class="readJsonForm invalid" action="<c:url value="/messageconverters/json" />" method="post">
 						<input id="readInvalidJsonSubmit" type="submit" value="Read invalid JSON (400 response code)" />	
@@ -369,6 +378,12 @@
 			<li>
 				<a id="validateErrors" class="textLink" href="<c:url value="/validate?number=3&date=2010-07-01" />">Validate, errors</a>
 			</li>
+            <li>
+                <a id="validateErrors" class="textLink" href="<c:url value="/validate?number=-3&date=2029-07-01" />">Customize Validate, errors</a>
+            </li>
+            <li>
+                <a id="validateErrors" class="textLink" href="<c:url value="/validateAnnotation?number=-3&date=2029-07-01" />">Customize Validate, errors</a>
+            </li>
 		</ul>	
 	</div>
 	<div id="exceptions">
@@ -397,8 +412,35 @@
 			<li>
 				<a href="<c:url value="/redirect/uriComponentsBuilder" />">UriComponentsBuilder</a>
 			</li>
+            <li>
+                <a href="<c:url value="/redirect/uriComponentsBuilder2" />">UriComponentsBuilder Forward</a>
+            </li>
+            <li>
+                <form id="redirectRequestBody" class="textForm" action="<c:url value="/redirect/uriComponentsBuilder3" />" method="post">
+                    <input id="requestBodySubmit" type="submit" value="UriComponentsBuilder POST Redirct" />
+                </form>
+            </li>
+            <li>
+                <form id="forwardRequestBody" class="textForm" action="<c:url value="/redirect/uriComponentsBuilder4" />" method="post">
+                    <input id="requestBodySubmit" type="submit" value="UriComponentsBuilder POST Forward" />
+                </form>
+            </li>
 		</ul>
 	</div>
+    <div id="rest">
+        <h2>RESTful</h2>
+        <p>
+            See the <code>org.springframework.samples.mvc.rest</code> package for the @Controller code  
+        </p>
+        <ul>
+            <li>
+                <a id="restUserNoPassword" class="textLink"  href="<c:url value="/user/nopassword" />">RESTful with JSONView no Password.</a>
+            </li>
+            <li>
+                <a id="restUserPassword" class="textLink"  href="<c:url value="/user/password" />">RESTful with JSONView with Password.</a>
+            </li>
+        </ul>
+    </div>
 	<div id="async">
 		<h2>Async Requests</h2>
 		<p>
@@ -412,7 +454,7 @@
 			<a id="callableResponseBodyLink" class="textLink"
 				href="<c:url value="/async/callable/response-body" />">GET /async/callable/response-body</a>
 		</li>
-		<li>
+        <li>
 			<a id="callableViewLink" class="textLink"
 				href="<c:url value="/async/callable/view" />">GET /async/callable/view</a>
 		</li>
@@ -429,6 +471,10 @@
 			<a id="callableCustomTimeoutLink" class="textLink"
 				href="<c:url value="/async/callable/custom-timeout-handling" />">GET /async/callable/custom-timeout-handling</a>
 		</li>
+        <li>
+            <a id="callableStreamLink" class="textLink"
+                href="<c:url value="/async/callable/stream" />">GET /async/callable/stream</a>
+        </li>
 		<li>
 			<a id="deferredResultSuccessLink" class="textLink"
 				href="<c:url value="/async/deferred-result/response-body" />">GET /async/deferred-result/response-body</a>

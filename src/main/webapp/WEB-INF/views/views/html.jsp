@@ -7,6 +7,7 @@
 </head>
 <body>
 <div class="success">
+    Hello:
 	<h3>foo: "${foo}"</h3>
 	<h3>fruit: "${fruit}"</h3>
 </div>

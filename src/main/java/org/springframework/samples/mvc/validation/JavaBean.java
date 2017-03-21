@@ -13,6 +13,7 @@ public class JavaBean {
 	
 	@NotNull
 	@Max(5)
+	@NotNegative
 	private Integer number;
 
 	@NotNull

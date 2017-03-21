@@ -3,18 +3,24 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="
+	    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+	<context:component-scan base-package="org.springframework.samples.mvc.**"></context:component-scan>
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
+	<!-- Enable Matrix Variables via enable-matrix-variables="true", default false-->
 	<annotation-driven conversion-service="conversionService" enable-matrix-variables="true">
 		<argument-resolvers>
 			<beans:bean class="org.springframework.samples.mvc.data.custom.CustomArgumentResolver"/>
 		</argument-resolvers>
+        <!-- Asynchronous support and web.xml upgrade to 3.0 -->
 		<async-support default-timeout="3000">
 			<callable-interceptors>
 				<beans:bean class="org.springframework.samples.mvc.async.TimeoutCallableProcessingInterceptor" />
@@ -43,7 +49,7 @@
 
 	<!-- Imports user-defined @Controller beans that process client requests -->
 	<beans:import resource="controllers.xml" />
-
+    
 	<task:annotation-driven />
 	
 </beans:beans>

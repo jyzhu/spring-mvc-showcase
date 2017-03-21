@@ -39,6 +39,30 @@ public class RedirectController {
 		return "redirect:" + redirectUri.toUriString();
 	}
 
+	@RequestMapping(value="/uriComponentsBuilder2", method=RequestMethod.GET)
+	public String uriComponentsBuilder2() {
+		String date = this.conversionService.convert(new LocalDate(2011, 12, 31), String.class);
+		UriComponents redirectUri = UriComponentsBuilder.fromPath("/redirect/{account}").queryParam("date", date)
+				.build().expand("a123").encode();
+		return "forward:" + redirectUri.toUriString();
+	}
+
+	@RequestMapping(value="/uriComponentsBuilder3", method=RequestMethod.POST)
+	public String uriComponentsBuilder3() {
+		String date = this.conversionService.convert(new LocalDate(2011, 12, 31), String.class);
+		UriComponents redirectUri = UriComponentsBuilder.fromPath("/redirect/{account}").queryParam("date", date)
+				.build().expand("a123").encode();
+		return "redirect:" + redirectUri.toUriString();
+	}
+
+	@RequestMapping(value="/uriComponentsBuilder4", method=RequestMethod.POST)
+	public String uriComponentsBuilder4() {
+		String date = this.conversionService.convert(new LocalDate(2011, 12, 31), String.class);
+		UriComponents redirectUri = UriComponentsBuilder.fromPath("/redirect/{account}").queryParam("date", date)
+				.build().expand("a123").encode();
+		return "forward:" + redirectUri.toUriString();
+	}
+
 	@RequestMapping(value="/{account}", method=RequestMethod.GET)
 	public String show(@PathVariable String account, @RequestParam(required=false) LocalDate date) {
 		return "redirect/redirectResults";

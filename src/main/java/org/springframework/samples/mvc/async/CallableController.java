@@ -1,7 +1,10 @@
 package org.springframework.samples.mvc.async;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.async.WebAsyncTask;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 
 @Controller
 @RequestMapping("/async/callable")
@@ -72,6 +76,27 @@ public class CallableController {
 		};
 
 		return new WebAsyncTask<String>(1000, callable);
+	}
+	
+	@RequestMapping("/stream")
+	public ResponseBodyEmitter handleStream() {
+		final ResponseBodyEmitter emitter = new ResponseBodyEmitter();
+		ExecutorService service = Executors.newSingleThreadExecutor();
+		
+		service.execute(() -> {
+			for (int i = 0; i < 10; i ++) {
+				try {
+					emitter.send("Send event: " + i + ", ", MediaType.TEXT_PLAIN);
+					
+					Thread.sleep(1000);
+				} catch (Exception e) {
+					return;
+				}
+			}
+			emitter.complete();
+		}); 
+		
+		return emitter;
 	}
 
 	@ExceptionHandler

@@ -17,6 +17,7 @@
 	<filter>
 		<filter-name>csrfFilter</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<!-- Asynchronous support and web.xml upgrade to 3.0 -->
 		<async-supported>true</async-supported>
 	</filter>
 	<filter-mapping>
@@ -33,6 +34,7 @@
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<!-- Asynchronous support and web.xml upgrade to 3.0 -->
 		<async-supported>true</async-supported>
 	</servlet>
 		
